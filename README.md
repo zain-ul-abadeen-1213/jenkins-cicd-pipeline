@@ -20,6 +20,19 @@ flowchart LR
 | **Package** | Files are packed into `zaintech-web-<build number>.tar.gz` and **archived as a build artifact** with a fingerprint | Every build produces one versioned, downloadable artifact |
 | **Deploy (local)** | The artifact is copied to a releases folder, unpacked into `current/`, and a `DEPLOYED.txt` receipt (app, build number, timestamp) is written | Deployment is provable after the fact, not just claimed |
 
+## Verified run — 6 November 2026
+
+The pipeline was run end-to-end against this repository from a Jenkins instance in Docker:
+
+| Step | Result |
+|---|---|
+| Job `zaintech-web-pipeline` (Pipeline from SCM) | ✅ Created, pointed at this repo, branch `main` |
+| Build **#1** | ✅ **SUCCESS** — all stages (Verify → Package → Deploy) completed |
+| Artifact | `zaintech-web-1.tar.gz` archived on the build |
+| Deploy receipt | `DEPLOYED.txt` written to the deploy folder with app name, build number and timestamp |
+
+![Jenkins pipeline job after its first successful build](docs/01-pipeline-first-build.png)
+
 ## The app
 
 A deliberately small static page for **Zain Tech Automation Solutions** (`index.html`, `style.css`, `app.js`). Its job is to be built, checked, packaged and deployed — the pipeline is the project.
@@ -42,7 +55,7 @@ A deliberately small static page for **Zain Tech Automation Solutions** (`index.
 | `Jenkinsfile` | The declarative pipeline: Verify → Package → Deploy, with success/failure messages |
 | `check.sh` | The Verify stage's checks (required files + page title) |
 | `index.html` · `style.css` · `app.js` | The static demo app being delivered |
-| `docs/` | Screenshots of the real run (added after the first successful pipeline build) |
+| `docs/` | Screenshot of the verified first pipeline build |
 
 ## Skills demonstrated
 
